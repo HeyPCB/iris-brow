@@ -1,0 +1,851 @@
+{
+  "name": "iris_brow",
+  "title": "Iris Brow - B4 forehead sensor strip for the Iris robot head: VL53L1X ToF, APDS-9306 light, two ICS-43434 I2S mics 108 mm apart, touch electrode",
+  "revision": "A",
+  "brief": "Board B4 of Iris, the human-eyed robot head (Iris system spec v0.1, section 4.3). A 116 x 12 mm, 2-layer, 1.6 mm strip behind the forehead shell: its F face looks out through the shell at X = +22.0 in the head frame. It carries a VL53L1X time-of-flight sensor on the centre line (distance to the face in front, for vergence), an APDS-9306-065 ambient light sensor above it, two TDK ICS-43434 bottom-port I2S microphones at exactly +-54 mm (sound direction; the robot-left one answers in the left I2S slot, the robot-right one in the right slot) and a two-wing copper touch electrode for the ESP32-S3's TOUCH14. Everything reaches the Cortex board (B1) over one JST SH 8-pin harness, J1, pinned exactly as the spec's BROW contract: 3V3, GND, I2C_SDA, I2C_SCL, I2S_BCLK, I2S_WS, I2S_MIC_SD, TOUCH. Four M2 holes on the shell bosses at the binding positions. The layout is mirror-symmetric about the centre line.",
+  "blocks": [
+    {
+      "block": "brow_link_sh8",
+      "as": "link",
+      "title": "BROW harness (J1, JST SH 8P) + 3V3 bulk",
+      "refs": {
+        "J?": "J1",
+        "C?": "C6"
+      },
+      "nets": {
+        "I2C_SDA": "I2C_SDA",
+        "I2C_SCL": "I2C_SCL",
+        "I2S_BCLK": "I2S_BCLK",
+        "I2S_WS": "I2S_WS",
+        "I2S_MIC_SD": "I2S_MIC_SD",
+        "TOUCH": "TOUCH"
+      }
+    },
+    {
+      "block": "brow_tof_vl53l1x",
+      "as": "tof",
+      "title": "ToF distance (VL53L1X, I2C 0x29)",
+      "refs": {
+        "U?": "U1",
+        "C1?": "C1",
+        "C2?": "C2",
+        "R?": "R1"
+      },
+      "nets": {
+        "SDA": "I2C_SDA",
+        "SCL": "I2C_SCL"
+      }
+    },
+    {
+      "block": "brow_als_apds9306",
+      "as": "als",
+      "title": "Ambient light (APDS-9306-065, I2C 0x52)",
+      "refs": {
+        "U?": "U2",
+        "C?": "C3"
+      },
+      "nets": {
+        "SDA": "I2C_SDA",
+        "SCL": "I2C_SCL"
+      }
+    },
+    {
+      "block": "brow_mic_ics43434",
+      "as": "mic_l",
+      "title": "MIC L, robot left, Y +54 (ICS-43434, LR low: left slot)",
+      "refs": {
+        "MK?": "MK1",
+        "C?": "C4",
+        "R?": "R2"
+      },
+      "nets": {
+        "SCK": "I2S_BCLK",
+        "WS": "I2S_WS",
+        "SD": "I2S_MIC_SD",
+        "LR": "GND"
+      }
+    },
+    {
+      "block": "brow_mic_ics43434",
+      "as": "mic_r",
+      "title": "MIC R, robot right, Y -54 (ICS-43434, LR high: right slot)",
+      "refs": {
+        "MK?": "MK2",
+        "C?": "C5",
+        "R?": "R3"
+      },
+      "nets": {
+        "SCK": "I2S_BCLK",
+        "WS": "I2S_WS",
+        "SD": "I2S_MIC_SD",
+        "LR": "3V3"
+      }
+    },
+    {
+      "block": "brow_touch_wings",
+      "as": "touch",
+      "title": "Touch electrode, two wings (TOUCH, ESP32-S3 TOUCH14)",
+      "refs": {
+        "TP1?": "TP1",
+        "TP2?": "TP2"
+      },
+      "nets": {
+        "TOUCH": "TOUCH"
+      }
+    },
+    {
+      "block": "brow_mounting_holes_m2",
+      "as": "holes",
+      "title": "Four M2 holes on the forehead-shell bosses",
+      "refs": {
+        "H1?": "H1",
+        "H2?": "H2",
+        "H3?": "H3",
+        "H4?": "H4"
+      }
+    }
+  ],
+  "pwrFlags": [
+    "GND",
+    "3V3"
+  ],
+  "netClasses": [
+    {
+      "name": "TOUCH",
+      "nets": [
+        "TOUCH"
+      ],
+      "track": 0.15,
+      "clearance": 0.35,
+      "why": "Espressif: touch traces no wider than 0.18 mm and 0.5-1 mm from ground. The clearance stops at 0.35 mm because J1's pads 7 and 8 are 0.40 mm apart (1.0 mm pitch, 0.6 mm pads), and KiCad checks the class clearance between them"
+    }
+  ],
+  "board": {
+    "width": 116.0,
+    "height": 12.0,
+    "layers": 2,
+    "origin": [
+      100.0,
+      100.0
+    ],
+    "corner_radius": 2.0,
+    "shape": {
+      "type": "polygon",
+      "points": [
+        [
+          0,
+          1.0
+        ],
+        [
+          14.5,
+          0.5625
+        ],
+        [
+          29,
+          0.25
+        ],
+        [
+          43.5,
+          0.0625
+        ],
+        [
+          58,
+          0.0
+        ],
+        [
+          72.5,
+          0.0625
+        ],
+        [
+          87,
+          0.25
+        ],
+        [
+          101.5,
+          0.5625
+        ],
+        [
+          116,
+          1.0
+        ],
+        [
+          116,
+          10.0
+        ],
+        [
+          101.5,
+          10.875
+        ],
+        [
+          87,
+          11.5
+        ],
+        [
+          72.5,
+          11.875
+        ],
+        [
+          58,
+          12.0
+        ],
+        [
+          43.5,
+          11.875
+        ],
+        [
+          29,
+          11.5
+        ],
+        [
+          14.5,
+          10.875
+        ],
+        [
+          0,
+          10.0
+        ]
+      ],
+      "fillets": [
+        2.0,
+        1000.0,
+        1000.0,
+        1000.0,
+        1000.0,
+        1000.0,
+        1000.0,
+        1000.0,
+        2.0,
+        2.0,
+        600.0,
+        600.0,
+        600.0,
+        600.0,
+        600.0,
+        600.0,
+        600.0,
+        2.0
+      ]
+    },
+    "rules": {
+      "clearance": 0.2,
+      "track": 0.2,
+      "via": [
+        0.6,
+        0.3
+      ],
+      "edge_clearance": 0.5,
+      "hole_to_hole": 0.5,
+      "min_through_hole": 0.3,
+      "min_track": 0.12,
+      "why_min_track": "the TOUCH class is 0.15 mm; 0.12 leaves room for Freerouting's rounding and is above JLC's 2-layer 0.10 mm"
+    },
+    "keepouts": [
+      {
+        "name": "touch_r_gap_f",
+        "rect": [
+          37.5,
+          0.0,
+          50.5,
+          7.75
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "pour"
+        ],
+        "why": "no ground pour within 1.5 mm of the electrode (Espressif: ground fill at least 1 mm away; sensor-to-ground gap 1-2 mm)"
+      },
+      {
+        "name": "touch_r_under_b",
+        "rect": [
+          37.5,
+          0.0,
+          50.5,
+          7.75
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "nothing on the opposite side of the electrode (Espressif: no ground fill on the opposite side)"
+      },
+      {
+        "name": "touch_r_ring_top",
+        "rect": [
+          37.5,
+          0.0,
+          50.5,
+          1.25
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_r_ring_bottom",
+        "rect": [
+          37.5,
+          6.25,
+          50.5,
+          7.75
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_r_ring_outer",
+        "rect": [
+          37.5,
+          1.25,
+          39.0,
+          6.25
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_r_ring_inner_top",
+        "rect": [
+          49.0,
+          1.25,
+          50.5,
+          3.15
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_r_ring_inner_bottom",
+        "rect": [
+          49.0,
+          4.35,
+          50.5,
+          6.25
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the inner side leaves a 1.2 mm slot (y 3.15-4.35) where the TOUCH track alone enters"
+      },
+      {
+        "name": "touch_l_gap_f",
+        "rect": [
+          65.5,
+          0.0,
+          78.5,
+          7.75
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "pour"
+        ],
+        "why": "no ground pour within 1.5 mm of the electrode (Espressif: ground fill at least 1 mm away; sensor-to-ground gap 1-2 mm)"
+      },
+      {
+        "name": "touch_l_under_b",
+        "rect": [
+          65.5,
+          0.0,
+          78.5,
+          7.75
+        ],
+        "layers": [
+          "B.Cu"
+        ],
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "nothing on the opposite side of the electrode (Espressif: no ground fill on the opposite side)"
+      },
+      {
+        "name": "touch_l_ring_top",
+        "rect": [
+          65.5,
+          0.0,
+          78.5,
+          1.25
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_l_ring_bottom",
+        "rect": [
+          65.5,
+          6.25,
+          78.5,
+          7.75
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_l_ring_outer",
+        "rect": [
+          77.0,
+          1.25,
+          78.5,
+          6.25
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_l_ring_inner_top",
+        "rect": [
+          65.5,
+          1.25,
+          67.0,
+          3.15
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ]
+      },
+      {
+        "name": "touch_l_ring_inner_bottom",
+        "rect": [
+          65.5,
+          4.35,
+          67.0,
+          6.25
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "tracks",
+          "vias"
+        ],
+        "why": "the inner side leaves a 1.2 mm slot (y 3.15-4.35) where the TOUCH track alone enters"
+      },
+      {
+        "name": "screw_h1",
+        "circle": {
+          "at": [
+            12.0,
+            6.0
+          ],
+          "d": 5.6
+        },
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "bare laminate under the boss tip (F) and the M2 screw head (B)"
+      },
+      {
+        "name": "screw_h2",
+        "circle": {
+          "at": [
+            34.0,
+            6.0
+          ],
+          "d": 5.6
+        },
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "bare laminate under the boss tip (F) and the M2 screw head (B)"
+      },
+      {
+        "name": "screw_h3",
+        "circle": {
+          "at": [
+            82.0,
+            6.0
+          ],
+          "d": 5.6
+        },
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "bare laminate under the boss tip (F) and the M2 screw head (B)"
+      },
+      {
+        "name": "screw_h4",
+        "circle": {
+          "at": [
+            104.0,
+            6.0
+          ],
+          "d": 5.6
+        },
+        "layers": "all",
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "bare laminate under the boss tip (F) and the M2 screw head (B)"
+      },
+      {
+        "name": "window_mic_r_port_seal",
+        "circle": {
+          "at": [
+            4.0,
+            6.0
+          ],
+          "d": 5.0
+        },
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "MIC R sound port (0.5 mm NPTH at x 4.0, y 6.0): flat mask round it for the shell's gasket. It bans pour too, so the F fill stops at its edge: the stitcher tests only a via's centre against a via ban, and a stitch via's ring overlapped the first version of this circle (DRC items_not_allowed, 2026-10-03)"
+      },
+      {
+        "name": "window_mic_l_port_seal",
+        "circle": {
+          "at": [
+            112.0,
+            6.0
+          ],
+          "d": 5.0
+        },
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "pour",
+          "tracks",
+          "vias"
+        ],
+        "why": "MIC L sound port (0.5 mm NPTH at x 112.0, y 6.0): flat mask round it for the shell's gasket. It bans pour too, so the F fill stops at its edge: the stitcher tests only a via's centre against a via ban, and a stitch via's ring overlapped the first version of this circle (DRC items_not_allowed, 2026-10-03)"
+      },
+      {
+        "name": "window_tof_slot_6x3.5",
+        "rect": [
+          55.0,
+          4.25,
+          61.0,
+          7.75
+        ],
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "pour",
+          "vias"
+        ],
+        "why": "the spec's 6 x 3.5 mm ToF slot over the emitter (x 56.48) and receiver (x 59.48): no via shows through it. It bans pour too, so the F fill stops at its edge: the stitcher tests only a via's centre against a via ban, and a stitch via's ring overlapped the first version of this circle (DRC items_not_allowed, 2026-10-03)"
+      },
+      {
+        "name": "window_als_d2",
+        "circle": {
+          "at": [
+            58.0,
+            2.12
+          ],
+          "d": 2.4
+        },
+        "layers": [
+          "F.Cu"
+        ],
+        "no": [
+          "pour",
+          "vias"
+        ],
+        "why": "the ALS window over the APDS-9306 active area (x 58.0, y 2.12): no via shows through it. It bans pour too, so the F fill stops at its edge: the stitcher tests only a via's centre against a via ban, and a stitch via's ring overlapped the first version of this circle (DRC items_not_allowed, 2026-10-03)"
+      }
+    ],
+    "notes": "Brief frame: x right, y down, seen from F (the face side). Head frame (Iris spec 4.3): X_H = +22.0 at the F face, Y_H = x - 58, Z_H = 56 - y. The outline is a brow: a parabola from y 0 at the centre to y 1.0 at the ends on top, and from y 12 to y 10.0 underneath, filleted (1000 mm and 600 mm on the shallow vertices, 2 mm at the four ends), inside the spec's binding 116 x 12 mm envelope and symmetric about x = 58. F face (out, toward the shell): VL53L1X centred at (58, 6), APDS-9306 at (58, 1.9), the two 10 x 5 mm touch wings centred at x 44 and 72, their decoupling. B face (into the head): J1 centred at the top edge with its mouth up, the two microphones (ports at x 4 and 112, y 6; the 0.5 mm NPTH opens on F). 2 layers, GND poured on both faces after routing; nothing but the wings' own TOUCH copper within 1.5 mm of a wing on F, and no copper at all under a wing on B."
+  },
+  "placement": {
+    "tof:U?": {
+      "lock": [
+        58.0,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "on the centre line (Y_H 0, Z_H 50): the spec's 'VL53L1X at x 55.5-60.5 (centre)'; emitter at x 56.48, receiver at x 59.48 (ST outline, rotated into KiCad's footprint frame)"
+    },
+    "tof:C1?": {
+      "lock": [
+        54.2,
+        5.2
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "100 nF beside AVDDVCSEL (pin 1), its 3V3 pad toward the pin (ST: as close as possible)"
+    },
+    "tof:C2?": {
+      "lock": [
+        53.6,
+        6.85
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "4.7 uF beside AVDD (pin 11), 3V3 pad toward the pin"
+    },
+    "tof:R?": {
+      "lock": [
+        61.8,
+        5.2
+      ],
+      "from_center": false,
+      "rot": 180,
+      "why": "XSHUT pull-up beside pin 5, mirroring C1 about the centre line"
+    },
+    "link:C?": {
+      "lock": [
+        62.4,
+        6.85
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "3V3 bulk beside the ToF, mirroring C2 about the centre line"
+    },
+    "als:U?": {
+      "lock": [
+        58.0,
+        1.9
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "on the centre line above the ToF (Z_H 54.1); active area at y 2.12"
+    },
+    "als:C?": {
+      "lock": [
+        55.6,
+        1.9
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "1 uF at the VDD pin (pin 3, lower left), 3V3 pad down"
+    },
+    "touch:TP1?": {
+      "lock": [
+        44.0,
+        3.75
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "right wing (robot right, Y_H -14), 10 x 5 mm; inside the spec's 40-52 touch zone"
+    },
+    "touch:TP2?": {
+      "lock": [
+        72.0,
+        3.75
+      ],
+      "from_center": false,
+      "rot": 90,
+      "why": "left wing (robot left, Y_H +14), the mirror of TP1"
+    },
+    "link:J?": {
+      "lock": [
+        58.0,
+        3.35
+      ],
+      "from_center": false,
+      "rot": 0,
+      "side": "bottom",
+      "why": "J1 centred on the B face, mouth up (+Z_H) 0.73 mm inside the top edge, pin 1 at x 54.5 and pin 8 (TOUCH) at x 61.5; mounting pads 0.58 mm from the edge. On the bottom face rot 0 is the footprint mirrored top-to-bottom (the SDK's convention), which points the mouth at -y"
+    },
+    "mic_r:MK?": {
+      "lock": [
+        4.71,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "side": "bottom",
+      "why": "MIC R: sound port (the footprint's 0.5 mm NPTH, 0.71 mm from its origin) at x 4.0, y 6.0 = Y_H -54.0, Z_H 50.0 exactly, outboard of the pads, so the pads face the rest of the board. Bottom port: the part is on B and the hole opens on F"
+    },
+    "mic_r:C?": {
+      "lock": [
+        5.1,
+        3.85
+      ],
+      "from_center": false,
+      "rot": 180,
+      "side": "bottom",
+      "why": "100 nF above MIC R: its 3V3 pad 1.2 mm from the VDD pad, its GND pad 1 mm above the port's GND ring (MIC R's LR is 3V3, so the ring has no other GND neighbour)"
+    },
+    "mic_r:R?": {
+      "lock": [
+        7.45,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "side": "bottom",
+      "why": "33 ohm inboard of MIC R's SD pad (x 6.07, y 6.0)"
+    },
+    "mic_l:MK?": {
+      "lock": [
+        111.29,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 270,
+      "side": "bottom",
+      "why": "MIC L: sound port at x 112.0, y 6.0 = Y_H +54.0, Z_H 50.0 exactly, outboard of the pads (MIC R turned 180 degrees)"
+    },
+    "mic_l:C?": {
+      "lock": [
+        110.9,
+        8.15
+      ],
+      "from_center": false,
+      "rot": 0,
+      "side": "bottom",
+      "why": "100 nF below MIC L: 3V3 pad toward the VDD pad (x 109.93, y 6.9), GND pad toward the port's GND ring (MIC R's arrangement turned 180 degrees)"
+    },
+    "mic_l:R?": {
+      "lock": [
+        108.55,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 90,
+      "side": "bottom",
+      "why": "33 ohm inboard of MIC L's SD pad (x 109.93, y 6.0)"
+    },
+    "holes:H1?": {
+      "lock": [
+        12.0,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "binding: H (Y -46, Z +50)"
+    },
+    "holes:H2?": {
+      "lock": [
+        34.0,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "binding: H (Y -24, Z +50)"
+    },
+    "holes:H3?": {
+      "lock": [
+        82.0,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "binding: H (Y +24, Z +50)"
+    },
+    "holes:H4?": {
+      "lock": [
+        104.0,
+        6.0
+      ],
+      "from_center": false,
+      "rot": 0,
+      "why": "binding: H (Y +46, Z +50)"
+    }
+  },
+  "route": {
+    "passes": 30,
+    "fanout": true,
+    "solve_s": 300,
+    "why": "every part is locked; the outline is stated and shaped, so it is never grown"
+  },
+  "stitch_pitch": 5.0,
+  "silk": {
+    "words": {
+      "tof:U?": "TOF",
+      "als:U?": "ALS",
+      "touch:TP1?": "TOUCH",
+      "touch:TP2?": "TOUCH",
+      "link:J?": "BROW"
+    },
+    "title": [
+      {
+        "text": "Iris Brow",
+        "y": 1.9,
+        "size": 1.5,
+        "bold": true
+      },
+      {
+        "text": "B4 forehead strip",
+        "y": 3.7,
+        "size": 0.8
+      },
+      {
+        "text": "CERN-OHL-S-2.0",
+        "y": 4.95,
+        "size": 0.8
+      },
+      {
+        "text": "rev {revision}  heypcb-kicad",
+        "y": 6.2,
+        "size": 0.8
+      }
+    ],
+    "title_why": "four short lines, about 12 mm wide and 6 mm tall, so the block fits the bare B-side box behind a touch wing (37.5-50.5 or 65.5-78.5 by 0-7.75): J1 holds the centre of the B face",
+    "words_why": "TOF and ALS are listed but find no spot: the 1.3 mm between the two sensors is under a 0.8 mm word's 1.47 mm text box, and caps or vias hold their other sides (measured 2026-10-03). The microphones keep their designators MK1 (MIC L) and MK2 (MIC R): 'MIC R' found no spot (C5 above, its own footprint silk below), so neither gets a word"
+  },
+  "captions": {
+    "place_3d": "Iris Brow placed: the VL53L1X and APDS-9306 on the centre line, the two touch wings either side, the M2 holes at Y -46/-24/+24/+46; the mics and J1 sit on the far face.",
+    "done_3d": "Iris Brow (B4): VL53L1X ToF, APDS-9306 light sensor, two ICS-43434 I2S mics at +-54 mm, a two-wing touch electrode and one JST SH 8-pin harness, on a 116 x 12 mm brow strip."
+  }
+}

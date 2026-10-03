@@ -1,0 +1,704 @@
+{
+  "parts": {
+    "bound": 14,
+    "unsourced": 0,
+    "conflicts": 0,
+    "refs_by_status": {
+      "bound": [
+        "J1",
+        "C6",
+        "U1",
+        "C1",
+        "C2",
+        "R1",
+        "U2",
+        "C3",
+        "MK1",
+        "C4",
+        "R2",
+        "MK2",
+        "C5",
+        "R3"
+      ],
+      "unsourced": [],
+      "conflict": []
+    },
+    "not_in_bom": [
+      "H1",
+      "H2",
+      "H3",
+      "H4"
+    ],
+    "extended_distinct": [
+      "C160407",
+      "C190004",
+      "C2649498",
+      "C5656610"
+    ],
+    "extended_fee_usd": 12.0,
+    "findings": [
+      {
+        "code": "jlcpcb_extended_parts",
+        "severity": "info",
+        "detail": "4 distinct Extended parts, about $12 in JLC loading fees",
+        "fix": "swap an Extended part for a Basic one where the table lists one"
+      }
+    ],
+    "table": "lcsc_pinned.json",
+    "table_source": "HeyPCB runner/cache/jlcparts/cache.sqlite3, table jlc_components, queried 2026-09-26. Each row's `snapshot` is that row's fetched_at."
+  },
+  "compose": {
+    "components": 20,
+    "nets": 11,
+    "noConnects": [
+      "U1.7",
+      "U1.8",
+      "U2.4",
+      "U2.5"
+    ],
+    "ran": true,
+    "seconds": 1.1
+  },
+  "schematic": {
+    "paper": "A3",
+    "file": "iris_brow.kicad_sch",
+    "ran": true,
+    "seconds": 1.7
+  },
+  "erc": {
+    "ran": true,
+    "errors": 0,
+    "warnings": 0,
+    "types": [],
+    "seconds": 1.6
+  },
+  "netlist": {
+    "ok": true,
+    "missing": [],
+    "extra": [],
+    "differ": [],
+    "nets": 11,
+    "ran": true,
+    "seconds": 0.3
+  },
+  "board": {
+    "footprints": 20,
+    "outline_mm": [
+      116.0,
+      12.0
+    ],
+    "stackup": {
+      "copper": 2,
+      "layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "planes": {},
+      "plane_layers": [],
+      "signal_layers": [
+        "F.Cu",
+        "B.Cu"
+      ],
+      "dfm_profile": "jlcpcb_2layer"
+    },
+    "ran": true,
+    "seconds": 0.6
+  },
+  "place": {
+    "parts": 20,
+    "log": [
+      "U1 -> (58.00, 6.00) rot 0 : rung 0 lock: on the centre line (Y_H 0, Z_H 50): the spec's 'VL53L1X at x 55.5-60.5 (centre)'; emitter at x 56.48, receiver at x 59.48 (ST outline, rotated into KiCad's footprint frame)",
+      "C1 -> (54.20, 5.20) rot 180 : rung 0 lock: 100 nF beside AVDDVCSEL (pin 1), its 3V3 pad toward the pin (ST: as close as possible)",
+      "C2 -> (53.60, 6.85) rot 180 : rung 0 lock: 4.7 uF beside AVDD (pin 11), 3V3 pad toward the pin",
+      "R1 -> (61.80, 5.20) rot 180 : rung 0 lock: XSHUT pull-up beside pin 5, mirroring C1 about the centre line",
+      "C6 -> (62.40, 6.85) rot 0 : rung 0 lock: 3V3 bulk beside the ToF, mirroring C2 about the centre line",
+      "U2 -> (58.00, 1.90) rot 0 : rung 0 lock: on the centre line above the ToF (Z_H 54.1); active area at y 2.12",
+      "C3 -> (55.60, 1.90) rot 90 : rung 0 lock: 1 uF at the VDD pin (pin 3, lower left), 3V3 pad down",
+      "TP1 -> (44.00, 3.75) rot 90 : rung 0 lock: right wing (robot right, Y_H -14), 10 x 5 mm; inside the spec's 40-52 touch zone",
+      "TP2 -> (72.00, 3.75) rot 90 : rung 0 lock: left wing (robot left, Y_H +14), the mirror of TP1",
+      "J1 -> (58.00, 3.35) rot 0 : rung 0 lock: J1 centred on the B face, mouth up (+Z_H) 0.73 mm inside the top edge, pin 1 at x 54.5 and pin 8 (TOUCH) at x 61.5; mounting pads 0.58 mm from the edge. On the bottom face rot 0 is the footprint mirrored top-to-bottom (the SDK's convention), which points the mouth at -y",
+      "MK2 -> (4.71, 6.00) rot 90 : rung 0 lock: MIC R: sound port (the footprint's 0.5 mm NPTH, 0.71 mm from its origin) at x 4.0, y 6.0 = Y_H -54.0, Z_H 50.0 exactly, outboard of the pads, so the pads face the rest of the board. Bottom port: the part is on B and the hole opens on F",
+      "C5 -> (5.10, 3.85) rot 180 : rung 0 lock: 100 nF above MIC R: its 3V3 pad 1.2 mm from the VDD pad, its GND pad 1 mm above the port's GND ring (MIC R's LR is 3V3, so the ring has no other GND neighbour)",
+      "R3 -> (7.45, 6.00) rot 90 : rung 0 lock: 33 ohm inboard of MIC R's SD pad (x 6.07, y 6.0)",
+      "MK1 -> (111.29, 6.00) rot 270 : rung 0 lock: MIC L: sound port at x 112.0, y 6.0 = Y_H +54.0, Z_H 50.0 exactly, outboard of the pads (MIC R turned 180 degrees)",
+      "C4 -> (110.90, 8.15) rot 0 : rung 0 lock: 100 nF below MIC L: 3V3 pad toward the VDD pad (x 109.93, y 6.9), GND pad toward the port's GND ring (MIC R's arrangement turned 180 degrees)",
+      "R2 -> (108.55, 6.00) rot 90 : rung 0 lock: 33 ohm inboard of MIC L's SD pad (x 109.93, y 6.0)",
+      "H1 -> (12.00, 6.00) rot 0 : rung 0 lock: binding: H (Y -46, Z +50)",
+      "H2 -> (34.00, 6.00) rot 0 : rung 0 lock: binding: H (Y -24, Z +50)",
+      "H3 -> (82.00, 6.00) rot 0 : rung 0 lock: binding: H (Y +24, Z +50)",
+      "H4 -> (104.00, 6.00) rot 0 : rung 0 lock: binding: H (Y +46, Z +50)"
+    ],
+    "ran": true,
+    "seconds": 0.1
+  },
+  "route": {
+    "before": 45,
+    "after": 0,
+    "open_by_net": {},
+    "fixes": [],
+    "passes": [
+      [
+        1,
+        19
+      ],
+      [
+        2,
+        18
+      ],
+      [
+        3,
+        17
+      ],
+      [
+        4,
+        15
+      ],
+      [
+        5,
+        11
+      ],
+      [
+        6,
+        11
+      ],
+      [
+        7,
+        11
+      ],
+      [
+        8,
+        11
+      ],
+      [
+        9,
+        11
+      ],
+      [
+        10,
+        11
+      ],
+      [
+        11,
+        10
+      ],
+      [
+        12,
+        9
+      ],
+      [
+        13,
+        9
+      ],
+      [
+        14,
+        6
+      ],
+      [
+        15,
+        5
+      ],
+      [
+        16,
+        4
+      ],
+      [
+        17,
+        4
+      ],
+      [
+        18,
+        4
+      ],
+      [
+        19,
+        4
+      ],
+      [
+        20,
+        4
+      ],
+      [
+        21,
+        4
+      ],
+      [
+        22,
+        4
+      ],
+      [
+        23,
+        4
+      ],
+      [
+        24,
+        4
+      ],
+      [
+        25,
+        4
+      ],
+      [
+        26,
+        4
+      ]
+    ],
+    "stats": {
+      "tracks": 204,
+      "vias": 28,
+      "length_mm": 732.5,
+      "length_by_layer_mm": {
+        "B.Cu": 467.8,
+        "F.Cu": 264.7
+      }
+    },
+    "layers": [
+      [
+        "F.Cu",
+        "signal"
+      ],
+      [
+        "B.Cu",
+        "signal"
+      ]
+    ],
+    "ladder": [
+      {
+        "rung": 1,
+        "tag": "1_fanout",
+        "classes": {},
+        "fanout": true,
+        "export": {
+          "poursWithheld": 2,
+          "keepoutsMirrored": 0,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 15,
+            "renamed": 2,
+            "nets": 15
+          },
+          "viaViaClearance_mm": null
+        },
+        "seconds": 27.3,
+        "ok": true,
+        "log": {
+          "nets": {
+            "3V3": 2,
+            "GND": 4,
+            "I2S_BCLK": 2
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 8,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 3,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 3,
+          "score": 3,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 3,
+        "last_mile": {
+          "ok": true,
+          "openBefore": 8,
+          "openAfterModel": 3,
+          "closed": 5,
+          "tracks": 14,
+          "vias": 3,
+          "deadlineHit": false,
+          "limitations": [],
+          "seconds": 5.78,
+          "connections": [
+            {
+              "net": "GND",
+              "from": "C4.2",
+              "to": "MK1.3",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 1.24
+            },
+            {
+              "net": "GND",
+              "from": "C5.2",
+              "to": "MK2.3",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 1.24
+            },
+            {
+              "net": "GND",
+              "from": "C4.2",
+              "to": "C1.2",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 0.49
+            },
+            {
+              "net": "GND",
+              "from": "C5.2",
+              "to": "C1.2",
+              "outcome": "no_path"
+            },
+            {
+              "net": "3V3",
+              "from": "C4.1",
+              "to": "C1.1",
+              "outcome": "closed",
+              "vias": 1,
+              "lengthMm": 50.02
+            },
+            {
+              "net": "3V3",
+              "from": "C5.1",
+              "to": "C1.1",
+              "outcome": "closed",
+              "vias": 2,
+              "lengthMm": 3.81
+            },
+            {
+              "net": "I2S_BCLK",
+              "from": "J1.5",
+              "to": "MK1.4",
+              "outcome": "no_path"
+            },
+            {
+              "net": "I2S_BCLK",
+              "from": "MK1.4",
+              "to": "J1.5",
+              "outcome": "no_path"
+            }
+          ],
+          "accepted": true,
+          "verdict": {
+            "beforeU": 8,
+            "afterU": 3,
+            "beforeE": 0,
+            "afterE": 0,
+            "introduced": 0,
+            "rekeyed": 0,
+            "introducedTypes": [],
+            "kind": "ok",
+            "accept": true
+          },
+          "kept_tracks": 14,
+          "kept_vias": 3
+        },
+        "open_by_net": {
+          "GND": 1,
+          "I2S_BCLK": 2
+        },
+        "stats": {
+          "tracks": 186,
+          "vias": 24,
+          "length_mm": 544.8,
+          "length_by_layer_mm": {
+            "B.Cu": 285.8,
+            "F.Cu": 259.0
+          }
+        }
+      },
+      {
+        "rung": 1,
+        "tag": "1_nofanout",
+        "classes": {},
+        "fanout": false,
+        "export": {
+          "poursWithheld": 2,
+          "keepoutsMirrored": 0,
+          "clearanceBumpedTo_mm": null,
+          "powerLayers": [],
+          "rewritten": [],
+          "pinShapesOnPlanesDropped": 0,
+          "planes": 0,
+          "canonical": {
+            "images": 15,
+            "renamed": 2,
+            "nets": 15
+          },
+          "viaViaClearance_mm": null
+        },
+        "seconds": 48.8,
+        "ok": true,
+        "log": {
+          "nets": {
+            "GND": 4
+          },
+          "timedOut": false,
+          "noProgress": true,
+          "last_unrouted": 11,
+          "read": true
+        },
+        "widths": {
+          "snapped": 0,
+          "widened": 0,
+          "kept_narrow": 0,
+          "raised_to_min": 0,
+          "below_min_deleted": 0
+        },
+        "shorts_deleted": 0,
+        "keepout_deleted": 0,
+        "drc": {
+          "ran": true,
+          "electrical": 0,
+          "unconnected": 0,
+          "score": 0,
+          "types": {},
+          "shorts": 0,
+          "keepout": 0
+        },
+        "open": 0,
+        "last_mile": {
+          "ok": true,
+          "openBefore": 4,
+          "openAfterModel": 0,
+          "closed": 4,
+          "tracks": 11,
+          "vias": 2,
+          "deadlineHit": false,
+          "limitations": [],
+          "seconds": 2.07,
+          "connections": [
+            {
+              "net": "GND",
+              "from": "C4.2",
+              "to": "MK1.3",
+              "outcome": "closed",
+              "vias": 2,
+              "lengthMm": 4.96
+            },
+            {
+              "net": "GND",
+              "from": "MK1.2",
+              "to": "C4.2",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 0.49
+            },
+            {
+              "net": "GND",
+              "from": "MK2.3",
+              "to": "C1.2",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 1.24
+            },
+            {
+              "net": "GND",
+              "from": "C4.2",
+              "to": "C1.2",
+              "outcome": "closed",
+              "vias": 0,
+              "lengthMm": 47.67
+            }
+          ],
+          "accepted": true,
+          "verdict": {
+            "beforeU": 4,
+            "afterU": 0,
+            "beforeE": 0,
+            "afterE": 0,
+            "introduced": 0,
+            "rekeyed": 0,
+            "introducedTypes": [],
+            "kind": "ok",
+            "accept": true
+          },
+          "kept_tracks": 11,
+          "kept_vias": 2
+        },
+        "open_by_net": {},
+        "stats": {
+          "tracks": 204,
+          "vias": 28,
+          "length_mm": 732.5,
+          "length_by_layer_mm": {
+            "B.Cu": 467.8,
+            "F.Cu": 264.7
+          }
+        }
+      }
+    ],
+    "kept_rung": "1_nofanout",
+    "classes_routed": {},
+    "fanout_kept": false,
+    "fanout_compare": {
+      "1_fanout": {
+        "open": 3,
+        "score": 3,
+        "vias": 24,
+        "seconds": 27.3
+      },
+      "1_nofanout": {
+        "open": 0,
+        "score": 0,
+        "vias": 28,
+        "seconds": 48.8
+      }
+    },
+    "pad_vias": [],
+    "timedOut": false,
+    "noProgress": true,
+    "ran": true,
+    "seconds": 94.9
+  },
+  "pour": {
+    "plan": [
+      {
+        "layer": "F.Cu",
+        "net": "GND",
+        "priority": 0
+      },
+      {
+        "layer": "B.Cu",
+        "net": "GND",
+        "priority": 0
+      }
+    ],
+    "open_before": 0,
+    "open_after_pour": 0,
+    "stitch_vias": 5,
+    "open_after_stitch": 0,
+    "island_repair_vias": 0,
+    "open_final": 0,
+    "zones": [],
+    "stats": {
+      "tracks": 204,
+      "vias": 33,
+      "length_mm": 732.5,
+      "length_by_layer_mm": {
+        "B.Cu": 467.8,
+        "F.Cu": 264.7
+      }
+    },
+    "ran": true,
+    "seconds": 0.7
+  },
+  "silk": {
+    "silk_clipped": 0,
+    "pin_labels": 0,
+    "silk_refused": [],
+    "words": 3,
+    "refs_seated": 12,
+    "refs_hidden": 5,
+    "title_offset_mm": [
+      13.0,
+      0.5
+    ],
+    "title_lines": 4,
+    "stitch_vias_displaced": 0,
+    "ran": true,
+    "seconds": 0.4
+  },
+  "drc": {
+    "ran": true,
+    "state": "fresh",
+    "board_sha": "c5436bcb4d8bb3296c1fde6869563ad9bd8676bcb121007b629b5a568e7de046",
+    "errors": 0,
+    "warnings": 0,
+    "unconnected": 0,
+    "parity": 0,
+    "error_types": {},
+    "warning_types": {},
+    "repairs": [],
+    "seconds": 2.6
+  },
+  "dfm": {
+    "ran": true,
+    "profile": "jlcpcb_2layer",
+    "copper_layers": 2,
+    "errors": 0,
+    "warnings": 1,
+    "rows": [
+      {
+        "rule": "footprint_silk_width",
+        "severity": "warning",
+        "count": 45,
+        "min_mm": 0.12,
+        "note": "stock footprint silk down to 0.12 mm; the fab prints it at its 0.15 mm minimum"
+      }
+    ]
+  },
+  "view3d": {
+    "frames": 63,
+    "ran": true,
+    "seconds": 0.1
+  },
+  "fab": {
+    "gerbers": [
+      "iris_brow-B_Cu.gbl",
+      "iris_brow-B_Mask.gbs",
+      "iris_brow-B_Paste.gbp",
+      "iris_brow-B_Silkscreen.gbo",
+      "iris_brow-Edge_Cuts.gm1",
+      "iris_brow-F_Cu.gtl",
+      "iris_brow-F_Mask.gts",
+      "iris_brow-F_Paste.gtp",
+      "iris_brow-F_Silkscreen.gto",
+      "iris_brow-job.gbrjob"
+    ],
+    "copper_layers": 2,
+    "copper_gerbers": [
+      "iris_brow-F_Cu.gtl",
+      "iris_brow-B_Cu.gbl"
+    ],
+    "gerber_job": {
+      "file": "iris_brow-job.gbrjob",
+      "layer_number": 2,
+      "board_thickness_mm": 1.6,
+      "copper_files": [
+        "iris_brow-F_Cu.gtl",
+        "iris_brow-B_Cu.gbl"
+      ],
+      "copper_mm": [
+        0.035,
+        0.035
+      ],
+      "dielectric_mm": [
+        1.51
+      ],
+      "dielectric": [
+        "FR4"
+      ]
+    },
+    "drill": [
+      "iris_brow.drl",
+      "iris_brow-drl_map.gbr"
+    ],
+    "zip": "iris_brow_gerbers.zip",
+    "pos": "iris_brow_pos.csv",
+    "cpl": "iris_brow_cpl_jlc.csv",
+    "cpl_rotations_corrected": 4,
+    "bom": "iris_brow_bom.csv",
+    "schematic_pdf": "iris_brow_schematic.pdf",
+    "step": "iris_brow.step",
+    "ready": true,
+    "blockers": [],
+    "drc_state": "fresh",
+    "ran": true,
+    "seconds": 5.6
+  },
+  "render": {
+    "ran": true,
+    "seconds": 603.8
+  },
+  "video": {
+    "ran": true,
+    "seconds": 59.1
+  }
+}
